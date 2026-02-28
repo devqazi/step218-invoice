@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STEP218 Invoice Generator</title>
+    <style>
+      :root {
+        --teal: #2e7f38;
+        --teal-dark: #276b30;
+        --text-primary: #213547;
+        --text-secondary: #334155;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        background: var(--teal);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .card {
+        width: min(360px, 100%);
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        padding: 28px;
+      }
+
+      h1 {
+        margin: 0 0 24px;
+        font-size: 20px;
+        font-weight: semibold;
+        color: var(--text-primary);
+        text-align: center;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      label {
+        font-size: 14px;
+        color: var(--text-secondary);
+      }
+
+      input {
+        width: 100%;
+        padding: 6px 8px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+      }
+
+      input:focus {
+        border-color: var(--teal);
+        box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2);
+      }
+      .suggestions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        > span {
+          color: var(--text-secondary);
+          font-size: 14px;
+          cursor: pointer;
+        }
+        > span:hover {
+          color: var(--teal);
+          text-decoration: underline;
+        }
+      }
+
+      button {
+        width: 100%;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: #ffffff;
+        background: var(--teal);
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: var(--teal-dark);
+      }
+
+      @media (max-width: 640px) {
+        form {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Step218 invoice</h1>
+      <form>
+        <div class="field">
+          <label for="serial">Serial</label>
+          <input type="text" id="serial" name="serial" />
+        </div>
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" />
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" />
+        </div>
+        <div class="field">
+          <label for="id">Payoneer ID</label>
+          <input type="text" id="id" name="id" />
+        </div>
+        <div class="field">
+          <label for="amount">Amount USD</label>
+          <input type="number" id="amount" name="amount" />
+        </div>
+        <div class="field">
+          <label for="date">Due Date</label>
+          <input type="date" id="date" name="date" />
+        </div>
+        <div class="suggestions">
+          <span data-id="EOM">End of Month</span>
+          <span data-id="EOLM">End of Last Month</span>
+        </div>
+        <button type="button">Download PDF</button>
+      </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@4.1.0/cdn.min.js"></script>
+    <script src="./pdfkit.standalone.js"></script>
+    <script src="./generate-invoice.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
