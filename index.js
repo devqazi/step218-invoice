@@ -2,8 +2,9 @@ const { format, endOfMonth, startOfMonth, subDays } = window.dateFns;
 
 const form = document.querySelector("form");
 const generateBtn = document.querySelector('button[type="button"]');
-const nameInput = document.getElementById("name");
 const serialInput = document.getElementById("serial");
+const nameInput = document.getElementById("name");
+const phoneInput = document.getElementById("phone");
 const emailInput = document.getElementById("email");
 const idInput = document.getElementById("id");
 const amountInput = document.getElementById("amount");
@@ -40,21 +41,22 @@ const downloadBlob = (blob, filename) => {
 const generateInvoice = async () => {
   const serial = serialInput.value;
   const name = nameInput.value;
+  const phone = phoneInput.value;
   const email = emailInput.value;
   const id = idInput.value;
   const amount = amountInput.value;
   const date = dateInput.value;
 
-  saveData({ name, email, id });
+  saveData({ name, phone, email, id });
 
   const blob = await step218Invoice({
     serial,
-    amount,
-    date,
     name,
+    phone,
     email,
     id,
-    phone: "",
+    amount,
+    date,
   });
 
   downloadBlob(blob, generateFilename(name, date));
